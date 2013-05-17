@@ -1,0 +1,239 @@
+<!doctype html>
+<html class="no-js ui-mobile-rendering" lang="en" manifest="project.manifest">
+<head>
+<title>Food Log</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="114x114" href="img/touch-icon-114.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="img/touch-icon-72.png" />
+<link rel="apple-touch-icon" href="img/touch-icon-57.png" />
+<link rel="apple-touch-startup-image" href="img/splash.png" />  
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<link rel="stylesheet" href="/css/patient.css" />
+<link rel="stylesheet" href="/css/lib/jquery.mobile.structure.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<script src="/js/lib/require.js" data-main="js/main"></script>
+<script type="text/x-mustache-template" id="day_template">
+<div data-role="panel" class="menu" data-swipe-close="false" data-dismissible="false">
+	<ul data-role="listview">
+		<li data-theme="c"><a class="food_choices_menu_item">Food Choices</a>
+		<li data-theme="c"><a class="exercise_options_menu_item">Exercise Options</a>
+		<li data-theme="c"><a class="steps_menu_item">Steps</a>
+		<li data-theme="c"><a class="screen_menu_item">Screen Time</a>
+		<li data-theme="c"><a class="new_day_menu_item">New Log</a>
+		<li data-theme="c"><a class="days_menu_item">Logs</a>
+		<li data-theme="c"><a class="about_menu_item">About</a>	
+		<li data-theme="c"><a class="logout_menu_item">Logout</a>
+    </ul>	
+</div>
+<div data-role="header">
+	<a data-icon="bars" class="menu_button">Menu</a>
+	<h1>{{ readableDate }}</h1>
+</div>
+<div data-role="content">
+ 	<ul id="choices_listview" data-role="listview">
+    </ul>
+</div>
+</script>
+<script type="text/x-mustache-template" id="good_template">
+<div data-role="header" data-theme="d">
+	<a data-icon="back" class="back_button">Back</a>
+	<h1>Good Choices</h1>
+	<a data-icon="arrow-r" class="next_button">Next</a>
+</div>
+<div data-role="content">
+	<ul class="foods_listview" data-role="listview" data-divider-theme="d" data-filter="true" data-filter-theme="d">
+	</ul>
+</div>
+</script>
+<script type="text/x-mustache-template" id="debug_template">
+<div data-role="header" data-theme="d">
+</div>
+<div data-role="content">
+	<ul class="foods_listview" data-role="listview" data-filter="true">
+	</ul>
+</div>
+</script>
+
+<script type="text/x-mustache-template" id="soso_template">
+<div data-role="header" data-theme="e">
+	<a data-icon="arrow-l" class="prev_button">Prev</a>
+	<h1>So So Choices</h1>
+	<a data-icon="arrow-r" class="next_button">Next</a>
+</div>
+<div data-role="content">
+	<ul class="foods_listview" data-role="listview" data-divider-theme="e" data-filter="true" data-filter-theme="e">
+	</ul>
+</div>
+</script>
+<script type="text/x-mustache-template" id="poor_template">
+<div data-role="header" data-theme="f">
+	<a data-icon="arrow-l" class="prev_button">Prev</a>
+	<h1>Poor Choices</h1>
+</div>
+<div data-role="content">
+	<ul class="foods_listview" data-role="listview" data-divider-theme="f" data-filter="true" data-filter-theme="f">
+	</ul>
+</div>
+</script>
+<script type="text/x-mustache-template" id="exercise_options_template">
+<div data-role="header">
+	<a data-icon="back" class="back_button">Back</a>
+	<h1>Exercise Options</h1>
+</div>
+<div data-role="content">
+	<ul id="exercises_listview" data-role="listview" data-filter="true">
+	</ul>
+</div>
+</script>
+<script type="text/x-mustache-template" id="food_template">
+<a><img src="img/foods/{{ group }}.png" alt="{{ group }}" class="ui-li-icon ui-corner-none">{{ name }}<span class="ui-li-count">{{ points }}</span></a>
+</script>
+<script type="text/x-mustache-template" id="number_template">
+<li data-theme="{{ theme }}"><img src="img/foods/{{ key }}.png" alt="{{ name }}" class="ui-li-icon ui-corner-none">{{ name }} ({{ min }} - {{ max }}) <span class="ui-li-count">{{ total }}</span></li>
+</script>
+<script type="text/x-mustache-template" id="food_portion_template">
+<a><img src="img/foods/{{ group }}.png" alt="{{ group }}" class="ui-li-icon ui-corner-none"><img src="img/{{ portion }}.png" alt="{{ portion }}" style="vertical-align: text-bottom">&nbsp;&nbsp;{{ name }}<span class="ui-li-count">{{ points }}</span></a>
+</script>
+<script type="text/x-mustache-template" id="exercise_template">
+<a>{{ name }}<span class="ui-li-count">{{ minutes }}</span></a>
+</script>
+<script type="text/x-mustache-template" id="portion_template">
+<div data-role="header">
+	<h1>Portion</h1>
+</div>
+<div data-role="content">
+	<ul data-role="listview" data-inset="true">
+		<li data-theme="{{ theme }}"><img src="img/foods/{{ group }}.png" alt="{{ group }}" class="ui-li-icon ui-corner-none">{{ name }}<span class="ui-li-count">{{ points }}</span></li>
+	</ul>
+    <input type="range" name="percent_input" id="percent_input" min="0" max="100" step="25" value="100">
+	<div style="text-align: center">
+		<button id="portion_cancel_button" data-inline="true">Cancel</button>
+		<button id="portion_add_button" data-inline="true">Add</button>
+	</div>
+</div>
+</script>
+<script type="text/x-mustache-template" id="screen_template">
+<div data-role="header">
+	<h1>Screen Time</h1>
+</div>
+<div data-role="content">
+    <input type="range" name="screen_input" id="screen_input" min="0" max="6" step="1" value="{{ screen }}">
+	<div style="text-align: center">
+		<button id="screen_cancel_button" data-inline="true">Cancel</button>
+		<button id="screen_save_button" data-inline="true">Save</button>
+	</div>
+</div>
+</script>
+<script type="text/x-mustache-template" id="steps_template">
+<div data-role="header">
+	<h1>Steps</h1>
+</div>
+<div data-role="content">
+    <input type="range" name="steps_input" id="steps_input" min="0" max="10000" step="100" value="{{ steps }}">
+	<div style="text-align: center">
+		<button id="steps_cancel_button" data-inline="true">Cancel</button>
+		<button id="steps_save_button" data-inline="true">Save</button>
+	</div>
+</div>
+</script>
+
+<script type="text/x-mustache-template" id="minutes_template">
+<div data-role="header">
+	<h1>Minutes</h1>
+</div>
+<div data-role="content">
+	<ul data-role="listview" data-inset="true">
+		<li>{{ name }}</li>
+	</ul>
+    <input type="range" id="minutes_input" id="percent_input" min="0" max="30" step="5" value="30">
+	<div style="text-align: center">
+		<button id="minutes_cancel_button" data-inline="true">Cancel</button>
+		<button id="minutes_add_button" data-inline="true">Add</button>
+	</div>
+</div>
+</script>
+</head>
+<body>
+<div id="block-ui"></div>
+<div id="fb-root"></div>
+<div id="initialize" data-role="page" data-title="Food Log">
+	<div data-role="header">
+		<h1></h1>
+	</div>
+    <div data-role="content">
+    </div>
+</div>
+<div id="error" data-role="page" data-title="Food Log" data-close-btn="none">
+	<div data-role="header">
+		<h1>Alert</h1>
+	</div>
+    <div data-role="content">
+	    <p style="text-align: center">A network error has occurred; check your
+	    network connectivity and try again.</p>
+	    <button id="reload_button">Reload Application</button>
+    </div>
+</div>
+<div id="update_required" data-role="page" data-title="Food Log" data-close-btn="none">
+	<div data-role="header">
+		<h1>Alert</h1>
+	</div>
+    <div data-role="content">
+	    <p style="text-align: center">Application is performing a required update.
+	    Wait about a minute and reload application.</p>
+	    <button id="reload_button">Reload Application</button>
+    </div>
+</div>
+<div id="about" data-role="page" data-title="Food Log" data-close-btn="none">
+	<div data-role="header">
+		<h1>About</h1>
+	</div>
+    <div data-role="content">
+	    <p style="text-align: center">2013-05-17v1</p>
+	    <button id="about_close_button">Close</button>
+    </div>
+</div>
+<div id="authenticate" data-role="page" data-title="Food Log" data-close-btn="none">
+	<div data-role="header">
+		<h1>Alert</h1>
+	</div>
+    <div data-role="content">
+    	<p style="text-align: center">This application requires that you log in with
+    	 a Facebook account.</p>
+    	<button id="login_button">Login</button>
+    </div>
+</div>
+<div id="unauthorized" data-role="page" data-title="Food Log" data-close-btn="none">
+	<div data-role="header">
+		<h1>Alert</h1>
+	</div>
+    <div data-role="content">
+    	<p style="text-align: center">The logged in Facebook account does not have access
+    	to this application. Confirm that you are logging in with the correct Facebook 
+    	account and then contact your therapist.</p>
+    	<button id="logout_button">Logout</button>
+    </div>
+</div>
+<div id="days" data-role="page" data-title="Food Log">
+	<div data-role="header">
+		<a data-icon="back" class="back_button">Back</a>
+		<h1>Logs</h1>
+	</div>
+    <div data-role="content">
+ 	<ul id="days_listview" data-role="listview">
+    </ul>
+    </div>
+</div>
+<div id="same_day_dialog" data-role="page" data-title="Food Log" data-close-btn="none" >
+	<div data-role="header">
+		<h1>Alert</h1>
+	</div>
+    <div data-role="content">
+		<p style="text-align: center">There is already a log for today.</p>
+		<button id="same_day_dialog_close">Close</button>
+    </div>
+</div>
+</body>
+</html>
