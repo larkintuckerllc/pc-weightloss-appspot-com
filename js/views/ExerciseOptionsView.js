@@ -5,7 +5,7 @@ define(["backbone","mustache","views/ExerciseView"],function(Backbone,Mustache,E
     	},
     	initialize: function() {
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log");
+        	this.$el.attr("data-title", "Daily Log");
         	var template = Mustache.compile($("#exercise_options_template").html());
            	this.$el.html(template());
     		var exercises = [

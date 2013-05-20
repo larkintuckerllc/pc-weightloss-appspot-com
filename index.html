@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js ui-mobile-rendering" lang="en" manifest="project.manifest">
 <head>
-<title>Food Log</title>
+<title>Daily Log</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
@@ -117,10 +117,10 @@
 </script>
 <script type="text/x-mustache-template" id="screen_template">
 <div data-role="header">
-	<h1>Screen Time</h1>
+	<h1>Minutes</h1>
 </div>
 <div data-role="content">
-    <input type="range" name="screen_input" id="screen_input" min="0" max="6" step="1" value="{{ screen }}">
+    <input type="range" name="screen_input" id="screen_input" min="0" max="360" step="30" value="{{ screen }}">
 	<div style="text-align: center">
 		<button id="screen_cancel_button" data-inline="true">Cancel</button>
 		<button id="screen_save_button" data-inline="true">Save</button>
@@ -159,14 +159,14 @@
 <body>
 <div id="block-ui"></div>
 <div id="fb-root"></div>
-<div id="initialize" data-role="page" data-title="Food Log">
+<div id="initialize" data-role="page" data-title="Daily Log">
 	<div data-role="header">
 		<h1></h1>
 	</div>
     <div data-role="content">
     </div>
 </div>
-<div id="error" data-role="page" data-title="Food Log" data-close-btn="none">
+<div id="error" data-role="page" data-title="Daily Log" data-close-btn="none">
 	<div data-role="header">
 		<h1>Alert</h1>
 	</div>
@@ -176,7 +176,7 @@
 	    <button id="reload_button">Reload Application</button>
     </div>
 </div>
-<div id="update_required" data-role="page" data-title="Food Log" data-close-btn="none">
+<div id="update_required" data-role="page" data-title="Daily Log" data-close-btn="none">
 	<div data-role="header">
 		<h1>Alert</h1>
 	</div>
@@ -186,16 +186,16 @@
 	    <button id="reload_button">Reload Application</button>
     </div>
 </div>
-<div id="about" data-role="page" data-title="Food Log" data-close-btn="none">
+<div id="about" data-role="page" data-title="Daily Log" data-close-btn="none">
 	<div data-role="header">
 		<h1>About</h1>
 	</div>
     <div data-role="content">
-	    <p style="text-align: center">2013-05-17v1</p>
+	    <p style="text-align: center">2013-05-20v1</p>
 	    <button id="about_close_button">Close</button>
     </div>
 </div>
-<div id="authenticate" data-role="page" data-title="Food Log" data-close-btn="none">
+<div id="authenticate" data-role="page" data-title="Daily Log" data-close-btn="none">
 	<div data-role="header">
 		<h1>Alert</h1>
 	</div>
@@ -205,7 +205,7 @@
     	<button id="login_button">Login</button>
     </div>
 </div>
-<div id="unauthorized" data-role="page" data-title="Food Log" data-close-btn="none">
+<div id="unauthorized" data-role="page" data-title="Daily Log" data-close-btn="none">
 	<div data-role="header">
 		<h1>Alert</h1>
 	</div>
@@ -216,7 +216,7 @@
     	<button id="logout_button">Logout</button>
     </div>
 </div>
-<div id="days" data-role="page" data-title="Food Log">
+<div id="days" data-role="page" data-title="Daily Log">
 	<div data-role="header">
 		<a data-icon="back" class="back_button">Back</a>
 		<h1>Logs</h1>
@@ -226,7 +226,7 @@
     </ul>
     </div>
 </div>
-<div id="same_day_dialog" data-role="page" data-title="Food Log" data-close-btn="none" >
+<div id="same_day_dialog" data-role="page" data-title="Daily Log" data-close-btn="none" >
 	<div data-role="header">
 		<h1>Alert</h1>
 	</div>

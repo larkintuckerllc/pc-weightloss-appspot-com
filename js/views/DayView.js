@@ -20,14 +20,14 @@ define(["backbone","mustache","views/ChoiceItemView","views/ExerciseItemView",
             this.model.choices().on("sync destroy",this.render,this);
             this.model.exercises().on("sync destroy",this.render,this);
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log"); 
+        	this.$el.attr("data-title", "Daily Log"); 
         	this.numbers = ["points","minutes","steps","screen","legumes","vegetables","fruits","lfsugardairy","nuts","leanmeats","wholegrain"];
     		var planRanges = {
     				success: {
 	    				points: {key: "points", name: "Points",  min: 37, max: 52},
-	    				minutes: {key: "minutes", name: "Minutes", min:30, max: "plus"},
+	    				minutes: {key: "minutes", name: "Exercise - Min.", min:30, max: "plus"},
 	    				steps: {key: "steps", name: "Steps", min: 5000, max: "plus"},
-	    				screen: {key: "screen", name: "Screen Time", min: 0, max: 2},
+	    				screen: {key: "screen", name: "Screen - Min.", min: 0, max: 60},
 	    				legumes: {key: "legumes", name: "Legumes",  min: 1, max: 2},
 	    				vegetables: {key: "vegetables", name: "Vegetables",  min: 4, max: "plus"},
 	    				fruits: {key: "fruits", name: "Fruits", total: 0,  min: 1, max: 2},
@@ -38,9 +38,9 @@ define(["backbone","mustache","views/ChoiceItemView","views/ExerciseItemView",
     				},
     				champion: {
 	    				points: {key: "points", name: "Points",  min: 47, max: 62},
-	    				minutes: {key: "minutes", name: "Minutes", min:30, max: "plus"},
+	    				minutes: {key: "minutes", name: "Exercise - Min.", min:30, max: "plus"},
 	    				steps: {key: "steps", name: "Steps", min: 5000, max: "plus"},
-	    				screen: {key: "screen", name: "Screen Time", min: 0, max: 2},
+	    				screen: {key: "screen", name: "Screen - Min.", min: 0, max: 60},
 	    				legumes: {key: "legumes", name: "Legumes",  min: 2, max: 3},
 	    				vegetables: {key: "vegetables", name: "Vegetables",  min: 5, max: "plus"},
 	    				fruits: {key: "fruits", name: "Fruits", total: 0,  min: 2, max: 3},
@@ -51,9 +51,9 @@ define(["backbone","mustache","views/ChoiceItemView","views/ExerciseItemView",
     				}, 
     				achieve: {
 	    				points: {key: "points", name: "Points",  min: 62, max: 75},
-	    				minutes: {key: "minutes", name: "Minutes", min:30, max: "plus"},
+	    				minutes: {key: "minutes", name: "Exercise - Min.", min:30, max: "plus"},
 	    				steps: {key: "steps", name: "Steps", min: 5000, max: "plus"},
-	    				screen: {key: "screen", name: "Screen Time", min: 0, max: 2},
+	    				screen: {key: "screen", name: "Screen - Min.", min: 0, max: 60},
 	    				legumes: {key: "legumes", name: "Legumes",  min: 3, max: 3},
 	    				vegetables: {key: "vegetables", name: "Vegetables",  min: 6, max: "plus"},
 	    				fruits: {key: "fruits", name: "Fruits", total: 0,  min: 3, max: 3},

@@ -8,7 +8,7 @@ define(["backbone","mustache","jquery","jquerymobile"],function(Backbone,Mustach
     		this.food = this.options.food;
     		this.day = this.options.day;
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log");
+        	this.$el.attr("data-title", "Daily Log");
         	this.$el.attr("data-close-btn", "none");
         	var template = Mustache.compile($("#portion_template").html());
         	var themes = {good: "d", soso: "e", poor: "f"};

@@ -6,7 +6,7 @@ define(["backbone","mustache","jquery","jquerymobile"],function(Backbone,Mustach
     	},
     	initialize: function() {
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log");
+        	this.$el.attr("data-title", "Daily Log");
         	this.$el.attr("data-close-btn", "none");
         	var template = Mustache.compile($("#steps_template").html());
         	this.$el.html(template(this.model));

@@ -6,7 +6,7 @@ define(["backbone","mustache","views/FoodView"],function(Backbone,Mustache,FoodV
     	},
         initialize: function() {
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log");
+        	this.$el.attr("data-title", "Daily Log");
         	this.$el.attr("data-theme", "e");
         	var template = Mustache.compile($("#soso_template").html());
            	this.$el.html(template());

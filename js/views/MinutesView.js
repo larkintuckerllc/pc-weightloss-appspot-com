@@ -8,7 +8,7 @@ define(["backbone","mustache","jquery","jquerymobile"],function(Backbone,Mustach
     		this.name = this.options.name;
     		this.day = this.options.day;
         	this.$el.attr("data-role", "page");
-        	this.$el.attr("data-title", "Food Log");
+        	this.$el.attr("data-title", "Daily Log");
         	this.$el.attr("data-close-btn", "none");
         	var template = Mustache.compile($("#minutes_template").html());
         	this.$el.html(template({name: this.name}));
