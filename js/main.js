@@ -22,7 +22,7 @@ require.config({
 });
 
 require(["jquery"],function($) {
-	var dataVersion = 4;
+	var dataVersion = 5;
 	$(document).on("mobileinit",
 			function(){
 				$.mobile.linkBindingEnabled = false;
