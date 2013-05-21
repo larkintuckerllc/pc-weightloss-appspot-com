@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2013-05-20v1
+# 2013-05-21v1
 
 CACHE:
 
@@ -71,6 +71,7 @@ js/models/DayModel.js
 js/models/ExerciseModel.js
 js/models/ProgramModel.js
 js/models/UnauthorizedModel.js
+js/models/WeightModel.js
 
 js/routers/Router.js
 
@@ -95,6 +96,8 @@ js/views/SoSoView.js
 js/views/StepsView.js
 js/views/UnauthorizedView.js
 js/views/UpdateRequiredView.js
+js/views/WeightItemView.js
+js/views/WeightsView.js
 
 NETWORK:
 

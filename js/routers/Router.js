@@ -5,6 +5,7 @@ define(["backbone","jquery",
         "views/DaysView","views/SameDayDialogView","views/ErrorView","views/AboutView",
         "views/PortionView","collections/DataVersionCollection","views/UpdateRequiredView",
         "views/ExerciseOptionsView","views/MinutesView","views/ScreenView","views/StepsView",
+        "views/WeightsView","views/PoundsView",
         "jquerymobile","backbonerelational"],
 		function(Backbone,$,
 				AuthenticateView,UnauthorizedView,
@@ -12,7 +13,8 @@ define(["backbone","jquery",
 				DayView,GoodView,SoSoView,PoorView,
 				DaysView,SameDayDialogView,ErrorView,AboutView,
 				PortionView,DataVersionCollection,UpdateRequiredView,
-				ExerciseOptionsView,MinutesView,ScreenView,StepsView) {
+				ExerciseOptionsView,MinutesView,ScreenView,StepsView,
+				WeightsView,PoundsView) {
 	var Router = Backbone.Router.extend( {
 		initialize: function(options) {
 			var dataVersion = options.dataVersion;
@@ -87,8 +89,12 @@ define(["backbone","jquery",
 					} else {			
 						router.program = ProgramModel.findOrCreate({id: data});
 						router.program.fetch({success: function() {
-							var daysView = new DaysView({el: "#days", model: router.program})
+							var daysView = new DaysView({el: "#days", model: router.program});
 							daysView.render();
+							var weightsView = new WeightsView({el: "#weights", model: router.program});
+							weightsView.render();
+							router.poundsView = new PoundsView({id: "pounds", model: router.program});
+				        	$("body").append(router.poundsView.el);
 				        	new SameDayDialogView({el: "#same_day_dialog", model: router.program});
 					   		var day = router.mostRecentDay();
 					   		if (day == null) {
@@ -206,6 +212,13 @@ define(["backbone","jquery",
         },        
         days: function() {
         	$.mobile.changePage("#days",{reverse: false,changeHash: false});            	         		
+        },
+        weights: function() {
+        	$.mobile.changePage("#weights",{reverse: false,changeHash: false});            	         		
+        },     
+        pounds: function() {
+        	router.poundsView.render();
+        	$.mobile.changePage("#pounds",{ role: "dialog" });            	         		
         },
         sameDay: function() {
     		$.mobile.changePage("#same_day_dialog", { role: "dialog" });            	         		

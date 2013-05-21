@@ -11,6 +11,7 @@ define(["backbone","mustache","views/ChoiceItemView","views/ExerciseItemView",
 			"click .screen_menu_item": "screen",			
 			"click .new_day_menu_item": "newDay",
 			"click .days_menu_item": "days",
+			"click .weights_menu_item": "weights",			
 			"click .logout_menu_item": "logout",
 			"click .about_menu_item": "about"			
 				
@@ -156,6 +157,9 @@ define(["backbone","mustache","views/ChoiceItemView","views/ExerciseItemView",
         },
         days: function() {
         	router.days();
+        },
+        weights: function() {
+        	router.weights();
         },
         logout: function() {
           	FB.logout();

@@ -1,4 +1,4 @@
-define(["backbone","models/DayModel","backbonerelational"],function(Backbone,DayModel) {
+define(["backbone","models/DayModel","models/WeightModel","backbonerelational"],function(Backbone,DayModel,WeightModel) {
     var Model = Backbone.RelationalModel.extend({
     	urlRoot: "/programs",
     	idAttribute: "id",
@@ -10,6 +10,15 @@ define(["backbone","models/DayModel","backbonerelational"],function(Backbone,Day
     			key: "programId",
     			includeInJSON: 'id'
     		}
+    	},
+    	{
+    		type: Backbone.HasMany,
+    		key: "weights",
+    		relatedModel: WeightModel,
+    		reverseRelation: {
+    			key: "programId",
+    			includeInJSON: 'id'
+    		}
     	}],
     	initialize: function() {
         	var days = this.get("days");
@@ -17,7 +26,13 @@ define(["backbone","models/DayModel","backbonerelational"],function(Backbone,Day
         		var order = -1 * day.date();
         	    return order;
         	};
-        	days.sort();    		
+        	days.sort();
+        	var weights = this.get("weights");
+        	weights.comparator = function(weight) {
+        		var order = -1 * weight.date();
+        	    return order;
+        	};
+        	weights.sort();
     	},
     	fbId: function() {
          	return this.get("fbId");
@@ -33,6 +48,9 @@ define(["backbone","models/DayModel","backbonerelational"],function(Backbone,Day
         },
         days: function() {
         	return this.get("days");
+        },
+        weights: function() {
+        	return this.get("weights");
         }
     });
     return Model;
