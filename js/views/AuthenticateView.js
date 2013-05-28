@@ -4,7 +4,8 @@ define(["backbone"],function(Backbone) {
 			"click #login_button": "login"
     	},
         login: function() {
-          	FB.login(function(response) { }, {scope:'email'});
+         	FB.login(function(response) { }, {scope:'email'});
+            return;
         }
     });
     return View;
