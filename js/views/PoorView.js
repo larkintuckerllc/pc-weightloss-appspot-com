@@ -31,7 +31,7 @@ define(["backbone","mustache","views/FoodView"],function(Backbone,Mustache,FoodV
 ],
 	 [
 {quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Alcohol (8 oz)", points: 9},
-{quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Fuit Juice (8 oz)", points: 9},
+{quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Fruit Juice (8 oz)", points: 9},
 {quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Kool-Aid (8 oz)", points: 9},
 {quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Soda - Sugar (8 oz)", points: 9},
 {quality: "poor" ,group: "beverages", groupName: "Beverages", name: "Sweet Tea (8 oz)", points: 9}
